@@ -1,0 +1,9 @@
+<form action='' method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {{ vehicles.management_form }}
+  {% for vehicle_form in vehicles %}
+      {{ vehicle_form.as_p }}
+  {% endfor %}
+  <input type="submit" value="Send">
+</form>
