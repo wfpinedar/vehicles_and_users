@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+<form method="GET">
+    {{ filter.form|crispy }}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<!--
+<ul>
+    {% for owner in filter.qs %}
+    <li>
+        <a href="{% url 'vehicles:detail' owner.id %}">{{ owner.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+-->
+
+<table class="table">
+    {% for owners in filter.qs %}
+        {% if forloop.first %}
+            <thead>
+            <tr>
+                {% for owner in owners %}
+                <th scope="col">
+                    {{ owner }}
+                </th>
+                {% endfor %}
+            </tr>
+            </thead>
+        {% endif %}
+            <tbody>
+            <tr>
+                <td>
+                    <a href="{% url 'vehicles:detail' owners.id %}">{{ owners.name }}</a>
+                </td>
+                <td>
+                    {{ owners.last_name }}
+                </td>
+                <td>
+                    {{ owners.id_image }}
+                </td>
+                <td>
+                    {{ owners.id }}
+                </td>
+            </tr>
+            </tbody>
+
+    {% endfor %}
+</table>
+
+
+{% endblock %}

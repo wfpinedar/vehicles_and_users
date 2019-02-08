@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+<h1>{{ owner.name }}</h1>
+
+<pre>
+  {{ owner }}
+</pre>
+
+{% endblock %}

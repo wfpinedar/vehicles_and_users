@@ -1,9 +1,42 @@
-<form action='' method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {{ vehicles.management_form }}
-  {% for vehicle_form in vehicles %}
-      {{ vehicle_form.as_p }}
-  {% endfor %}
-  <input type="submit" value="Send">
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+<form action='' method="POST" class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h4 class="center">Owner</h4>
+    {{ form|crispy }}
+    <h4>Vehicle</h4>
+    {{ vehicles.management_form|crispy }}
+    <table class="table">
+    {% for vehicle_form in vehicles.forms %}
+        {% if forloop.first %}
+            <thead>
+            <tr>
+                {% for vehicle in vehicle_form.visible_fields %}
+                <th scope="col">
+                    {{ vehicle.label|capfirst }}
+                </th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for vehicle in vehicle_form.visible_fields %}
+                    <td>
+                        {{ vehicle }}
+                    </td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        {% endif %}
+        <!--{% bootstrap_form vehicle_form layout='inline' %}-->
+    {% endfor %}
+    </table>
+    {% buttons %}
+        <!--<button type="submit" class="btn btn-primary" value="Add"> Add </button>-->
+        <button type="submit" class="btn btn-success" value="Send"> Enviar </button>
+    {% endbuttons %}
 </form>
+{% endblock %}

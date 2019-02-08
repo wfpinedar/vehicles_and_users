@@ -11,9 +11,14 @@ TRADEMARK_CHOICES = (
     (FORD, "Ford"),
     (VOLKSWAGEN, "Volkswagen"),
     (TOYOTA, "Toyota"),
-    (HYUNDAI,"Hyundai"),
-    (CHEVROLET,"Chevrolet"),
-    (HONDA,"Honda"),
-    (KIA,"Kia"),
-    (MAZDA,"Mazda")
+    (HYUNDAI, "Hyundai"),
+    (CHEVROLET, "Chevrolet"),
+    (HONDA, "Honda"),
+    (KIA, "Kia"),
+    (MAZDA, "Mazda")
+)
+
+ORDER_CHOICES = (
+    ('ascending', 'Ascending'),
+    ('descending', 'Descending')
 )
