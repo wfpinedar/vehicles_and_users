@@ -5,3 +5,5 @@ django-bootstrap4
 django-crispy-forms
 django-tables2
 django-filter
+djangorestframework
+markdown

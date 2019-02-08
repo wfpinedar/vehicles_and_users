@@ -38,7 +38,6 @@ class OwnerListView(ListView):
     model = Owner
     template_name = 'base_generic.html'
 
-
     def get_context_data(self, **kwargs):
         context = super(OwnerListView, self).get_context_data(**kwargs)
         context['filter'] = OwnerFilter(self.request.GET, queryset=self.get_queryset().values())
