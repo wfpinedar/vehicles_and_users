@@ -28,4 +28,4 @@ class Vehicle(models.Model):
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.id} {self.owner.name} {self.owner.name}"
+        return f"{self.id} {self.trademark} {self.type} {self.owner.name}"

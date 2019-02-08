@@ -20,7 +20,7 @@ urlpatterns = [
         name='detail'
     ),
     path(
-        'vehicle/<int:pk>/',
+        'vehicle/(?P<pk>[0-9]+)/\\$$',
         VehicleDetailView.as_view(),
         name='vehicle'
     ),

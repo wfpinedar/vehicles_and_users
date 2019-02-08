@@ -3,10 +3,26 @@
 
 {% block main %}
 
-<h1>{{ vehicles.id }}</h1>
+<h1>{{ vehicle.id }}</h1>
 
-<pre>
-  {{ vehicles }}
-</pre>
+<table class="table">
+            <tbody>
+            <tr>
+                <td>
+                    <a href="{% url 'vehicles:vehicle' vehicle.id %}">{{ vehicle.owner.name }}</a>
+                </td>
+                <td>
+                    {{ vehicle.id }}
+                </td>
+                <td>
+                    {{ vehicle.get_trademark_display }}
+                </td>
+                <td>
+                    {{ vehicle.type }}
+                </td>
+            </tr>
+            </tbody>
+
+</table>
 
 {% endblock %}

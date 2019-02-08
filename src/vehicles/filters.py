@@ -1,5 +1,5 @@
 from django_filters import FilterSet, ChoiceFilter
-from .models import Owner
+from .models import Owner, Vehicle
 from .data import ORDER_CHOICES
 
 
