@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView
 from .forms import VehicleMemberFormSet
-from .models import Owner
+from .models import Owner, Vehicle
 from django.db import transaction
 from .filters import OwnerFilter
 
@@ -48,3 +48,8 @@ class OwnerListView(ListView):
 class OwnerDetailView(DetailView):
     model = Owner
     template_name = 'owners.html'
+
+
+class VehicleDetailView(DetailView):
+    model = Vehicle
+    template_name = 'vehicles.html'

@@ -6,7 +6,9 @@
 <h1>{{ owner.name }}</h1>
 
 <pre>
-  {{ owner }}
+    {% for vehicle in owner.vehicles_set.all %}
+        <a href="{% url 'vehicles' item_id=vehicle.id %}">{{ vehicle.id }}</a>
+    {% endfor %}
 </pre>
 
 {% endblock %}

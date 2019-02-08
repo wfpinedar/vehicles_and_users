@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
-from .views import NewOwnerVehicleFormView, OwnerListView, OwnerDetailView
+from .views import NewOwnerVehicleFormView, OwnerListView, OwnerDetailView, VehicleDetailView
 
 urlpatterns = [
     path(
@@ -18,6 +18,11 @@ urlpatterns = [
         '<int:pk>/',
         OwnerDetailView.as_view(),
         name='detail'
+    ),
+    path(
+        'vehicle/<int:pk>/',
+        VehicleDetailView.as_view(),
+        name='vehicle'
     ),
     path(r'list_owners',
          OwnerListView.as_view(),
