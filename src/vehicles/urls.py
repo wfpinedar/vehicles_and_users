@@ -1,6 +1,13 @@
 from django.urls import path
 from django.conf.urls import url
-from .views import NewOwnerVehicleFormView, OwnerListView, OwnerDetailView, VehicleDetailView
+
+from .views import TradeMarkTemplateView
+from .views import TradeMarkFormView
+from .views import NewOwnerVehicleFormView
+from .views import OwnerListView
+from .views import OwnerDetailView
+from .views import VehicleDetailView
+
 
 urlpatterns = [
     path(
@@ -27,5 +34,17 @@ urlpatterns = [
     path(r'list_owners',
          OwnerListView.as_view(),
          name="list_owners"
-         )
+         ),
+
+    path(
+        r'list_trademarks',
+        TradeMarkTemplateView.as_view(),
+        name="list_trademarks"
+    ),
+
+    path(
+        r'trades_list',
+        TradeMarkFormView.as_view(),
+        name="trades_list"
+    )
 ]

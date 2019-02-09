@@ -1,11 +1,18 @@
-from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, ListView
-from .forms import VehicleMemberFormSet
-from .models import Owner, Vehicle
 from django.db import transaction
-from .filters import OwnerFilter
+from django.db.models import Count
+from django.shortcuts import render
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.views.generic import TemplateView
+from django.views.generic import ListView
+from django.views.generic import FormView
 
-# Create your views here.
+from .data import TRADEMARK_CHOICES
+from .forms import TradeMarkForm
+from .forms import VehicleMemberFormSet
+from .filters import OwnerFilter
+from .models import Owner
+from .models import Vehicle
 
 
 class NewOwnerVehicleFormView(CreateView):
@@ -49,6 +56,47 @@ class OwnerDetailView(DetailView):
     template_name = 'owners.html'
 
 
+class TradeMarkTemplateView(TemplateView):
+    template_name = 'trademarks_report.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        registers = Vehicle.objects.values('trademark').annotate(count=Count('trademark'))
+
+        trademarks = dict(TRADEMARK_CHOICES)
+
+        count_list = []
+        for register in registers:
+            count_list.append({
+                'trademark': trademarks[register['trademark']],
+                'count': register['count']
+            })
+
+        context['registers'] = count_list
+
+        return context
+
+
 class VehicleDetailView(DetailView):
     model = Vehicle
     template_name = 'vehicles.html'
+
+
+class TradeMarkFormView(FormView):
+    template_name = 'trades_list.html'
+    form_class = TradeMarkForm
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+        trademarks = dict(TRADEMARK_CHOICES)
+        trademark = int(data.get('trademark', 0))
+
+        context = self.get_context_data()
+        context.update({
+            'vehicles': Vehicle.objects.filter(trademark=trademark),
+            'trademark': trademarks.get(trademark)
+        })
+
+
+        return render(self.request, self.template_name, context)
